@@ -4,18 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMState
 import ru.kontur.mobile.visualfsm.sample_android.ui.theme.VisualFSMSampleAndroidTheme
-import ru.kontur.mobile.visualfsm.sample_android.ui.auth.LoginScreen
-import ru.kontur.mobile.visualfsm.sample_android.ui.auth.RegistrationScreen
-import ru.kontur.mobile.visualfsm.sample_android.ui.auth.UserAuthorizedScreen
+import ru.kontur.mobile.visualfsm.sample_android.ui.auth.ScreenDataMapper
+import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.LoginScreenData
+import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.RegistrationScreenData
+import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.UserAuthorizedScreenData
+import ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen.LoginScreen
+import ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen.RegistrationScreen
+import ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen.UserAuthorizedScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,19 +38,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun AuthScreen() {
-    val demoAuthFeature = DependencyManager.getAuthFeature()
+    val authFeature = DependencyManager.getAuthFeature()
 
-    val state = demoAuthFeature.observeState()
+    val state = authFeature.observeState()
         .collectAsState(
-            initial = demoAuthFeature.getCurrentState()
+            initial = authFeature.getCurrentState()
         ).value
 
-    when (state) {
-        is AuthFSMState.AsyncWorkState.Authenticating -> LoginScreen(state)
-        is AuthFSMState.AsyncWorkState.Registering -> RegistrationScreen(state)
-        is AuthFSMState.ConfirmationRequested -> RegistrationScreen(state)
-        is AuthFSMState.Login -> LoginScreen(state)
-        is AuthFSMState.Registration -> RegistrationScreen(state)
-        is AuthFSMState.UserAuthorized -> UserAuthorizedScreen(state)
+    when (val data = ScreenDataMapper.map(state)) {
+        is LoginScreenData -> LoginScreen(data, authFeature)
+        is RegistrationScreenData -> RegistrationScreen(data, authFeature)
+        is UserAuthorizedScreenData -> UserAuthorizedScreen(data, authFeature)
     }
 }

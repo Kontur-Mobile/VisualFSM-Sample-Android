@@ -1,4 +1,4 @@
-package ru.kontur.mobile.visualfsm.sample_kmm.android
+package ru.kontur.mobile.visualfsm.sample_android.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -79,7 +79,7 @@ fun CustomTextButton(
 }
 
 @Composable
-fun CustomConfirmDialog(
+fun ConfirmDialog(
     title: String,
     description: String,
     onDismiss: () -> Unit,
@@ -89,8 +89,6 @@ fun CustomConfirmDialog(
     Dialog(onDismissRequest = onDismiss) {
         Box(
             modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 256.dp)
-                .fillMaxSize()
                 .background(
                     color = Color.White,
                     shape = RoundedCornerShape(16.dp)
@@ -98,8 +96,8 @@ fun CustomConfirmDialog(
         ) {
             Column(
                 modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxSize(),
+                    .padding(16.dp)
+                    .wrapContentSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {

@@ -1,4 +1,4 @@
-package ru.kontur.mobile.visualfsm.sample_android.ui.auth
+package ru.kontur.mobile.visualfsm.sample_android.ui.auth.component
 
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import ru.kontur.mobile.visualfsm.sample_kmm.android.CustomInputField
+import ru.kontur.mobile.visualfsm.sample_android.ui.common.CustomInputField
 
 @Composable
 fun EmailInputField(
