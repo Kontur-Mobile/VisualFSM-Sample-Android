@@ -2,6 +2,8 @@ buildscript {
     ext {
         compose_version = '1.2.0-beta03'
         kotlin_version = '1.6.21'
+        visualfsm_version = '1.0.3'
+        koin_version = '3.2.0'
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
