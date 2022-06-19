@@ -15,7 +15,11 @@ class HandleRegistrationResult(val result: RegistrationResult) : AuthFSMAction()
         }
 
         override fun transform(state: AsyncWorkState.Registering): Login {
-            return Login(state.mail, state.password)
+            return Login(
+                mail = state.mail,
+                password = state.password,
+                snackBarMessage = "${state.mail} registered"
+            )
         }
     }
 
@@ -24,11 +28,16 @@ class HandleRegistrationResult(val result: RegistrationResult) : AuthFSMAction()
         Registration::class
     ) {
         override fun predicate(state: AsyncWorkState.Registering): Boolean {
-            return result == RegistrationResult.BAD_CREDENTIAL
+            return result == RegistrationResult.USER_ALREADY_REGISTERED
         }
 
         override fun transform(state: AsyncWorkState.Registering): Registration {
-            return Registration(state.mail, state.password, "Bad credential")
+            return Registration(
+                mail = state.mail,
+                password = state.password,
+                repeatedPassword = state.password,
+                errorMessage = "User already registered"
+            )
         }
     }
 
@@ -41,7 +50,12 @@ class HandleRegistrationResult(val result: RegistrationResult) : AuthFSMAction()
         }
 
         override fun transform(state: AsyncWorkState.Registering): Registration {
-            return Registration(state.mail, state.password, state.password, "No internet")
+            return Registration(
+                mail = state.mail,
+                password = state.password,
+                repeatedPassword = state.password,
+                errorMessage = "No internet"
+            )
         }
     }
 

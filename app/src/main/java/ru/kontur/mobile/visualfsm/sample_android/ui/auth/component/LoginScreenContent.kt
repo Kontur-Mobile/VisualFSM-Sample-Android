@@ -124,7 +124,8 @@ fun LoginScreenContentPreview() {
                 mail = "test@test.com",
                 password = "",
                 errorMessage = null,
-                isAuthenticationInProgress = false
+                isAuthenticationInProgress = false,
+                snackBarMessage = null,
             ),
             {},
             {},

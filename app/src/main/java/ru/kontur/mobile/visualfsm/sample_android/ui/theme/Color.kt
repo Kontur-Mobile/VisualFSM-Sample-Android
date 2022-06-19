@@ -2,7 +2,7 @@ package ru.kontur.mobile.visualfsm.sample_android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Blue400 = Color(0xff42a5f5)
+val Blue600 = Color(0xff1e88e5)
+val Blue800 = Color(0xff1565c0)
+val Cyan200 = Color(0xff80deea)

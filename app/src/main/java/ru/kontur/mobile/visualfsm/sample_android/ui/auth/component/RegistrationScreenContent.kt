@@ -2,8 +2,6 @@ package ru.kontur.mobile.visualfsm.sample_android.ui.auth.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -31,7 +29,7 @@ fun RegistrationScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Spacer(modifier = Modifier.height(64.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         RegistrationText()
         Spacer(modifier = Modifier.height(64.dp))
         EmailInputField(

@@ -6,7 +6,8 @@ sealed class AuthFSMState : State {
     data class Login(
         val mail: String,
         val password: String,
-        val errorMessage: String? = null
+        val errorMessage: String? = null,
+        val snackBarMessage: String? = null,
     ) : AuthFSMState()
 
     data class Registration(

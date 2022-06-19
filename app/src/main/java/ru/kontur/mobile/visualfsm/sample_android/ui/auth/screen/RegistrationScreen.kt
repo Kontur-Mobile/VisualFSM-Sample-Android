@@ -2,6 +2,8 @@ package ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -25,7 +27,7 @@ fun RegistrationScreen(
         topBar = {
             TopAppBar(
                 backgroundColor = MaterialTheme.colors.background,
-            ) {
+                ) {
                 ButtonArrowBack {
                     authFeature.toLogin()
                 }
@@ -34,6 +36,7 @@ fun RegistrationScreen(
     ) { padding ->
         Box(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .fillMaxSize()
                 .padding(padding)
         ) {

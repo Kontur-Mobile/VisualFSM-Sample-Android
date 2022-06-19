@@ -45,4 +45,8 @@ class AuthFeature(initialState: AuthFSMState) : Feature<AuthFSMState, AuthFSMAct
     fun handleChangeLoginData(mail: String, password: String) {
         proceed(HandleChangeLoginData(mail, password))
     }
+
+    fun handleSnackBarShowed() {
+        proceed(HandleSnackBarShowed())
+    }
 }

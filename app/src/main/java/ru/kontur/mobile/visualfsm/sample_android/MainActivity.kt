@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    AuthScreen()
+                    AuthFlow()
                 }
             }
         }
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun AuthScreen() {
+private fun AuthFlow() {
     val authFeature = DependencyManager.getAuthFeature()
 
     val state = authFeature.observeState()

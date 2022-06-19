@@ -5,4 +5,5 @@ data class LoginScreenData(
     val password: String,
     val errorMessage: String?,
     val isAuthenticationInProgress: Boolean,
+    val snackBarMessage: String?
 ) : AuthScreenData()

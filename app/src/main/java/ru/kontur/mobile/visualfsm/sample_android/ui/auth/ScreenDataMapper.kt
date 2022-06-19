@@ -13,13 +13,15 @@ object ScreenDataMapper {
                 mail = state.mail,
                 password = state.password,
                 errorMessage = state.errorMessage,
-                isAuthenticationInProgress = false
+                isAuthenticationInProgress = false,
+                snackBarMessage = state.snackBarMessage
             )
             is AuthFSMState.AsyncWorkState.Authenticating -> LoginScreenData(
                 mail = state.mail,
                 password = state.password,
                 errorMessage = null,
-                isAuthenticationInProgress = true
+                isAuthenticationInProgress = true,
+                snackBarMessage = null
             )
             is AuthFSMState.Registration -> RegistrationScreenData(
                 mail = state.mail,
