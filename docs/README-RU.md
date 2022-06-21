@@ -20,17 +20,17 @@
 
 <img src="./graph.png" alt="graph"/>
 
-Feature: [AuthFeature.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFeature.kt).
+Feature: [AuthFeature.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFeature.kt)
 
-States: [AuthFSMState.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFSMState.kt).
+States: [AuthFSMState.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFSMState.kt)
 
-Actions: [actions](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/actions).
+Actions: [actions](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/actions)
 
-AsyncWorker: [AuthFSMAsyncWorker.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFSMAsyncWorker.kt).
+AsyncWorker: [AuthFSMAsyncWorker.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFSMAsyncWorker.kt)
 
-Маппер States в модель данных Ui: [ScreenDataMapper.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/ui/auth/ScreenDataMapper.kt).
+Маппер States в модель данных Ui: [ScreenDataMapper.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/ui/auth/ScreenDataMapper.kt)
 
-Генерация графа и пример тестов: [AuthFSMTests.kt](../app/src/test/java/ru/kontur/mobile/visualfsm/sample_android/AuthFSMTests.kt).
+Генерация графа и пример тестов: [AuthFSMTests.kt](../app/src/test/java/ru/kontur/mobile/visualfsm/sample_android/AuthFSMTests.kt)
 
 Для визуализации на CI используйте утилиту [graphviz](https://graphviz.org/doc/info/command.html), для визуализации на компьютере разработчика используйте [webgraphviz](http://www.webgraphviz.com/).
 

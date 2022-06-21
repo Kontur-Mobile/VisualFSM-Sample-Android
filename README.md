@@ -20,18 +20,18 @@ separate module that would allow it to be connected to testing environment.
 
 <img src="docs/graph.png" alt="graph"/>
 
-Feature: [AuthFeature.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFeature.kt).
+Feature: [AuthFeature.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFeature.kt)
 
-States: [AuthFSMState.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFSMState.kt).
+States: [AuthFSMState.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFSMState.kt)
 
-Actions: [actions](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/actions).
+Actions: [actions](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/actions)
 
-AsyncWorker: [AuthFSMAsyncWorker.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFSMAsyncWorker.kt).
+AsyncWorker: [AuthFSMAsyncWorker.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFSMAsyncWorker.kt)
 
-States to Ui data models mapper: [ScreenDataMapper.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/ui/auth/ScreenDataMapper.kt).
+States to Ui data models mapper: [ScreenDataMapper.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/ui/auth/ScreenDataMapper.kt)
 
 Generate digraph and tests
-sample: [AuthFSMTests.kt](./app/src/test/java/ru/kontur/mobile/visualfsm/sample_android/AuthFSMTests.kt).
+sample: [AuthFSMTests.kt](./app/src/test/java/ru/kontur/mobile/visualfsm/sample_android/AuthFSMTests.kt)
 
 For CI visualization use [graphviz](https://graphviz.org/doc/info/command.html), for the local visualization (on your
 PC) use [webgraphviz](http://www.webgraphviz.com/).
