@@ -18,7 +18,7 @@ separate module that would allow it to be connected to testing environment.
 
 ### Authorization and registration process
 
-<img src="docs/graph.png" alt="graph" width="1000"/>
+<img src="docs/graph.png" alt="graph"/>
 
 Feature: [AuthFeature.kt](./app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFeature.kt).
 
@@ -38,23 +38,28 @@ PC) use [webgraphviz](http://www.webgraphviz.com/).
 
 ### Screenshots
 
-<style>
-table th:first-of-type {
-    width: 33%;
-}
-table th:nth-of-type(2) {
-    width: 33%;
-}
-table th:nth-of-type(3) {
-    width: 33%;
-}
-</style>
-
-|            Login             |     Registration      |  ConfirmationRequested  |
-|:----------------------------:|:---------------------:|:-----------------------:|
-|    ![](./docs/login.png)     |  ![](./docs/reg.png)  | ![](./docs/confirm.png) |
-|  AsyncWorkState.Registering  |  Login with snackbar  |     UserAuthorized      |
-| ![](./docs/reg_progress.png) | ![](./docs/snack.png) | ![](./docs/welcome.png) |
+<table width="100%">
+  <tr>
+  <td width="33%">Login</td>
+  <td width="33%">Registration</td>
+  <td width="33%">ConfirmationRequested</td>
+  </tr>
+  <tr>
+  <td width="33%"><img src="./docs/login.png"/></td>
+  <td width="33%"><img src="./docs/reg.png"/></td>
+  <td width="33%"><img src="./docs/confirm.png"/></td>
+  </tr>
+  <tr>
+  <td width="33%">AsyncWorkState.Registering</td>
+  <td width="33%">Login with snackbar</td>
+  <td width="33%">UserAuthorized</td>
+  </tr>
+  <tr>
+  <td width="33%"><img src="./docs/reg_progress.png"/></td>
+  <td width="33%"><img src="./docs/snack.png"/></td>
+  <td width="33%"><img src="./docs/welcome.png"/></td>
+  </tr>
+</table>
 
 ### What is MVI
 

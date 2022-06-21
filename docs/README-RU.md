@@ -18,7 +18,7 @@
 
 ### Процесс авторизации и регистрации пользователя
 
-<img src="docs/graph.png" alt="graph" width="1000"/>
+<img src="./graph.png" alt="graph"/>
 
 Feature: [AuthFeature.kt](../app/src/main/java/ru/kontur/mobile/visualfsm/sample_android/feature/auth/fsm/AuthFeature.kt).
 
@@ -36,23 +36,28 @@ AsyncWorker: [AuthFSMAsyncWorker.kt](../app/src/main/java/ru/kontur/mobile/visua
 
 ### Скриншоты
 
-<style>
-table th:first-of-type {
-    width: 33%;
-}
-table th:nth-of-type(2) {
-    width: 33%;
-}
-table th:nth-of-type(3) {
-    width: 33%;
-}
-</style>
-
-|            Login             |     Registration      |  ConfirmationRequested  |
-|:----------------------------:|:---------------------:|:-----------------------:|
-|    ![](./login.png)          |  ![](./reg.png)       | ![](./confirm.png)      |
-|  AsyncWorkState.Registering  |  Login with snackbar  |     UserAuthorized      |
-| ![](./reg_progress.png)      | ![](./snack.png)      | ![](./welcome.png)      |
+<table width="100%">
+  <tr>
+  <td width="33%">Login</td>
+  <td width="33%">Registration</td>
+  <td width="33%">ConfirmationRequested</td>
+  </tr>
+  <tr>
+  <td width="33%"><img src="./login.png"/></td>
+  <td width="33%"><img src="./reg.png"/></td>
+  <td width="33%"><img src="./confirm.png"/></td>
+  </tr>
+  <tr>
+  <td width="33%">AsyncWorkState.Registering</td>
+  <td width="33%">Login with snackbar</td>
+  <td width="33%">UserAuthorized</td>
+  </tr>
+  <tr>
+  <td width="33%"><img src="./reg_progress.png"/></td>
+  <td width="33%"><img src="./snack.png"/></td>
+  <td width="33%"><img src="./welcome.png"/></td>
+  </tr>
+</table>
 
 ### Что такое MVI
 
