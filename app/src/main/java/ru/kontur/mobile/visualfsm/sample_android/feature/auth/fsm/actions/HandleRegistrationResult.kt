@@ -6,10 +6,7 @@ import ru.kontur.mobile.visualfsm.sample_android.feature.auth.data.RegistrationR
 
 class HandleRegistrationResult(val result: RegistrationResult) : AuthFSMAction() {
 
-    inner class Success : Transition<AsyncWorkState.Registering, Login>(
-        AsyncWorkState.Registering::class,
-        Login::class
-    ) {
+    inner class Success : Transition<AsyncWorkState.Registering, Login>() {
         override fun predicate(state: AsyncWorkState.Registering): Boolean {
             return result == RegistrationResult.SUCCESS
         }
@@ -23,10 +20,7 @@ class HandleRegistrationResult(val result: RegistrationResult) : AuthFSMAction()
         }
     }
 
-    inner class BadCredential : Transition<AsyncWorkState.Registering, Registration>(
-        AsyncWorkState.Registering::class,
-        Registration::class
-    ) {
+    inner class BadCredential : Transition<AsyncWorkState.Registering, Registration>() {
         override fun predicate(state: AsyncWorkState.Registering): Boolean {
             return result == RegistrationResult.USER_ALREADY_REGISTERED
         }
@@ -41,10 +35,7 @@ class HandleRegistrationResult(val result: RegistrationResult) : AuthFSMAction()
         }
     }
 
-    inner class ConnectionFailed : Transition<AsyncWorkState.Registering, Registration>(
-        AsyncWorkState.Registering::class,
-        Registration::class
-    ) {
+    inner class ConnectionFailed : Transition<AsyncWorkState.Registering, Registration>() {
         override fun predicate(state: AsyncWorkState.Registering): Boolean {
             return result == RegistrationResult.NO_INTERNET
         }
@@ -58,10 +49,4 @@ class HandleRegistrationResult(val result: RegistrationResult) : AuthFSMAction()
             )
         }
     }
-
-    override fun getTransitions() = listOf(
-        Success(),
-        BadCredential(),
-        ConnectionFailed(),
-    )
 }

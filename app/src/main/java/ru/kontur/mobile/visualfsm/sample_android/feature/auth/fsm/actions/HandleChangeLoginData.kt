@@ -8,16 +8,9 @@ class HandleChangeLoginData(
     val password: String,
 ): AuthFSMAction() {
 
-    inner class ChangeLoginData: Transition<AuthFSMState.Login, AuthFSMState.Login>(
-        AuthFSMState.Login::class,
-        AuthFSMState.Login::class
-    ) {
+    inner class ChangeLoginData: Transition<AuthFSMState.Login, AuthFSMState.Login>() {
         override fun transform(state: AuthFSMState.Login): AuthFSMState.Login {
             return AuthFSMState.Login(mail, password)
         }
     }
-
-    override fun getTransitions() = listOf(
-        ChangeLoginData()
-    )
 }
