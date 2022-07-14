@@ -7,20 +7,11 @@ class HandleChangeRegistrationData(
     val mail: String,
     val password: String,
     val repeatPassword: String,
-): AuthFSMAction() {
+) : AuthFSMAction() {
 
-    inner class ChangeRegistrationData
-        : Transition<AuthFSMState.Registration, AuthFSMState.Registration>(
-        AuthFSMState.Registration::class,
-        AuthFSMState.Registration::class
-    ) {
+    inner class ChangeRegistrationData : Transition<AuthFSMState.Registration, AuthFSMState.Registration>() {
         override fun transform(state: AuthFSMState.Registration): AuthFSMState.Registration {
             return AuthFSMState.Registration(mail, password, repeatPassword)
         }
     }
-
-
-    override fun getTransitions() = listOf(
-        ChangeRegistrationData()
-    )
 }

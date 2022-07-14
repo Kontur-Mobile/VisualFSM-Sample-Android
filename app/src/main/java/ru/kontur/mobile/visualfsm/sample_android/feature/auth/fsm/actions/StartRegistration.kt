@@ -4,10 +4,7 @@ import ru.kontur.mobile.visualfsm.Transition
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMState.*
 
 class StartRegistration : AuthFSMAction() {
-    inner class RegistrationStart : Transition<Registration, ConfirmationRequested>(
-        Registration::class,
-        ConfirmationRequested::class
-    ) {
+    inner class RegistrationStart : Transition<Registration, ConfirmationRequested>() {
         override fun predicate(state: Registration): Boolean {
             return state.password == state.repeatedPassword && state.password.isNotBlank()
         }
@@ -17,10 +14,7 @@ class StartRegistration : AuthFSMAction() {
         }
     }
 
-    inner class ValidationFailed : Transition<Registration, Registration>(
-        Registration::class,
-        Registration::class
-    ) {
+    inner class ValidationFailed : Transition<Registration, Registration>() {
         override fun predicate(state: Registration): Boolean {
             return state.password != state.repeatedPassword || state.password.isBlank()
         }
@@ -34,9 +28,4 @@ class StartRegistration : AuthFSMAction() {
             )
         }
     }
-
-    override fun getTransitions() = listOf(
-        RegistrationStart(),
-        ValidationFailed(),
-    )
 }
