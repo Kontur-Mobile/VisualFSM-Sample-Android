@@ -1,17 +1,17 @@
 package ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm
 
 import ru.kontur.mobile.visualfsm.Feature
-import ru.kontur.mobile.visualfsm.GenerateTransitionFactory
+import ru.kontur.mobile.visualfsm.GenerateTransitionsFactory
+import ru.kontur.mobile.visualfsm.providers.GeneratedTransitionsFactoryProvider.provideTransitionsFactory
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.data.UserFlow
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.actions.*
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.interactor.AuthInteractor
-import ru.kontur.mobile.visualfsm.tools.GeneratedTransitionFactoryProvider.provideTransitionFactory
 
-@GenerateTransitionFactory
+@GenerateTransitionsFactory
 class AuthFeature(initialState: AuthFSMState) : Feature<AuthFSMState, AuthFSMAction>(
     initialState = initialState,
     asyncWorker = AuthFSMAsyncWorker(AuthInteractor()), // In real case inject dependency by DI
-    transitionFactory = provideTransitionFactory()
+    transitionsFactory = provideTransitionsFactory()
 ) {
 
     fun toRegistration() {

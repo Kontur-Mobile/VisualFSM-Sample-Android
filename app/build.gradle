@@ -55,10 +55,15 @@ android {
 dependencies {
     // VisualFSM base classes
     implementation "ru.kontur.mobile.visualfsm:visualfsm-core:$visualfsm_version"
-    // Use AnnotationProcessor
+
+    // Code generation
     ksp "ru.kontur.mobile.visualfsm:visualfsm-compiler:$visualfsm_version"
-    // Use tools for convenient provide of the generated code and tests
-    implementation "ru.kontur.mobile.visualfsm:visualfsm-tools:$visualfsm_version"
+
+    // Classes for easy getting generated code
+    implementation "ru.kontur.mobile.visualfsm:visualfsm-providers:$visualfsm_version"
+
+    // Graph creation and analysis
+    testImplementation "ru.kontur.mobile.visualfsm:visualfsm-tools:$visualfsm_version"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation "androidx.compose.ui:ui:$compose_version"
