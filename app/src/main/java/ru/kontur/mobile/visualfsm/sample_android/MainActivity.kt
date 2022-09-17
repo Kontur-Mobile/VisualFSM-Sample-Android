@@ -1,7 +1,6 @@
 package ru.kontur.mobile.visualfsm.sample_android
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -9,12 +8,8 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import org.koin.android.ext.android.get
-import org.koin.android.scope.AndroidScopeComponent
-import org.koin.androidx.scope.createActivityRetainedScope
-import org.koin.core.context.loadKoinModules
+import org.koin.android.ext.android.inject
 import org.koin.core.module.dsl.scopedOf
-import org.koin.core.scope.Scope
 import org.koin.dsl.module
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMAsyncWorker
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMState
@@ -28,27 +23,26 @@ import ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen.RegistrationScre
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen.UserAuthorizedScreen
 import ru.kontur.mobile.visualfsm.sample_android.ui.theme.VisualFSMSampleAndroidTheme
 
-class MainActivity : ComponentActivity(), AndroidScopeComponent {
-    override var scope: Scope? = null
+class MainActivity : BaseActivity() {
 
-    private lateinit var authFeature: AuthFeature
+    private val authFeature: AuthFeature by inject()
+
+    override val scopeModule = { bundle: Bundle? ->
+        module {
+            scope<MainActivity> {
+                scopedOf(::AuthFSMAsyncWorker)
+                scoped {
+                    AuthFeature(
+                        getSavedOrInitialAuthFSMState(bundle),
+                        get()
+                    )
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        createActivityRetainedScope()
-
-        authFeature = try {
-            get()
-        } catch (e: Exception) {
-            loadKoinModules(
-                module {
-                    scope<MainActivity> {
-                        scopedOf(::AuthFSMAsyncWorker)
-                        scoped { AuthFeature(getSavedOrInitialAuthFSMState(savedInstanceState), get()) }
-                    }
-                })
-            get()
-        }
 
         setContent {
             VisualFSMSampleAndroidTheme {
@@ -63,28 +57,15 @@ class MainActivity : ComponentActivity(), AndroidScopeComponent {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (!isChangingConfigurations) {
-            scope?.closed
-            scope = null
-        }
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(AUTH_FSM_SAVED_STATE, authFeature.getCurrentState())
         super.onSaveInstanceState(outState)
     }
 
-    private fun getSavedOrInitialAuthFSMState(savedInstanceState: Bundle?): AuthFSMState {
+    private fun getSavedOrInitialAuthFSMState(bundle: Bundle?): AuthFSMState {
         val initialState = AuthFSMState.Login("", "")
 
-        return if (savedInstanceState != null) {
-            val parcelableState = savedInstanceState.getParcelable<AuthFSMState>(AUTH_FSM_SAVED_STATE)
-            parcelableState ?: initialState
-        } else {
-            initialState
-        }
+        return bundle?.getParcelable(AUTH_FSM_SAVED_STATE) ?: initialState
     }
 
     companion object {
