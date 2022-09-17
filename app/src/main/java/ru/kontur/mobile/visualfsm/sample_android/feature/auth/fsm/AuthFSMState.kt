@@ -1,8 +1,11 @@
 package ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import ru.kontur.mobile.visualfsm.State
 
-sealed class AuthFSMState : State {
+@Parcelize
+sealed class AuthFSMState : State, Parcelable {
     data class Login(
         val mail: String,
         val password: String,
@@ -22,6 +25,7 @@ sealed class AuthFSMState : State {
         val password: String
     ) : AuthFSMState()
 
+    @Parcelize
     sealed class AsyncWorkState : AuthFSMState() {
         data class Authenticating(
             val mail: String,

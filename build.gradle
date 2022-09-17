@@ -9,6 +9,7 @@ buildscript {
         lifecycle_runtime_ktx_version = '2.5.1'
         activity_compose_version = '1.5.1'
         core_ktx_version = '1.8.0'
+        koin_version= '3.2.1'
 
         // Test dependency versions
         junit_version = '4.13.2'
