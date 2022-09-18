@@ -10,6 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import org.koin.android.ext.android.inject
 import org.koin.core.module.dsl.scopedOf
+import org.koin.core.qualifier.Qualifier
 import org.koin.dsl.module
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMAsyncWorker
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMState
@@ -27,9 +28,9 @@ class MainActivity : BaseActivity() {
 
     private val authFeature: AuthFeature by inject()
 
-    override val scopeModule = { bundle: Bundle? ->
+    override val stateScopeModule = { stateScopeQualifier: Qualifier, bundle: Bundle? ->
         module {
-            scope<MainActivity> {
+            scope(stateScopeQualifier) {
                 scopedOf(::AuthFSMAsyncWorker)
                 scoped {
                     AuthFeature(
