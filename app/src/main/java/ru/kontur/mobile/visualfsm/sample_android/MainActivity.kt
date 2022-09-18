@@ -62,14 +62,14 @@ class MainActivity : BaseActivity() {
         super.onSaveInstanceState(outState)
     }
 
-    private fun getSavedOrInitialAuthFSMState(bundle: Bundle?): AuthFSMState {
-        val initialState = AuthFSMState.Login("", "")
-
-        return bundle?.getParcelable(AUTH_FSM_SAVED_STATE) ?: initialState
-    }
-
     companion object {
         private const val AUTH_FSM_SAVED_STATE = "auth_fsm_saved_state"
+
+        private fun getSavedOrInitialAuthFSMState(bundle: Bundle?): AuthFSMState {
+            val initialState = AuthFSMState.Login("", "")
+
+            return bundle?.getParcelable(AUTH_FSM_SAVED_STATE) ?: initialState
+        }
     }
 }
 
