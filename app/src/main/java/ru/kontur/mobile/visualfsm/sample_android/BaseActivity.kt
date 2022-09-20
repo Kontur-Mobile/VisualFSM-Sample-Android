@@ -26,7 +26,7 @@ abstract class BaseActivity : ComponentActivity(), KoinScopeComponent {
         super.onCreate(savedInstanceState)
         stateScopeId = savedInstanceState?.getString(STATE_SCOPE_ID) ?: getScopeId()
 
-        if (isNewProcess(savedInstanceState)) {
+        if (getKoin().getScopeOrNull(stateScopeId) == null) {
             Log.d(this::class.simpleName, "Init new UI scope: ${scope.id}")
             stateScopeModule(scope.scopeQualifier, savedInstanceState)?.let {
                 loadKoinModules(it)
@@ -37,7 +37,6 @@ abstract class BaseActivity : ComponentActivity(), KoinScopeComponent {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(APP_CODE, App.appCode)
         outState.putString(STATE_SCOPE_ID, scope.id)
         super.onSaveInstanceState(outState)
     }
@@ -55,11 +54,6 @@ abstract class BaseActivity : ComponentActivity(), KoinScopeComponent {
         stateScopeModule(scope.scopeQualifier, null)?.let { module ->
             unloadKoinModules(module)
         }
-    }
-
-    private fun isNewProcess(savedInstanceState: Bundle?): Boolean {
-        val savedAppCode = savedInstanceState?.getString(APP_CODE)
-        return savedAppCode != App.appCode
     }
 
     companion object {

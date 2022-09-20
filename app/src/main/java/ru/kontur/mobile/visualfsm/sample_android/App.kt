@@ -9,7 +9,6 @@ import java.util.*
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        appCode = UUID.randomUUID().toString()
         initKoin()
     }
 
@@ -18,10 +17,5 @@ class App : Application() {
             androidLogger()
             modules(appModule)
         }
-    }
-
-    companion object {
-        lateinit var appCode: String
-            private set
     }
 }
