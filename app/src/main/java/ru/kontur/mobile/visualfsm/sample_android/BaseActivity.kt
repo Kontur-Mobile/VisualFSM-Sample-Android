@@ -57,7 +57,6 @@ abstract class BaseActivity : ComponentActivity(), KoinScopeComponent {
     }
 
     companion object {
-        private const val APP_CODE = "app_code"
         private const val STATE_SCOPE_ID = "state_scope_id"
     }
 }
