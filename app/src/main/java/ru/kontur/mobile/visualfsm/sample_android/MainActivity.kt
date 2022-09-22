@@ -1,7 +1,6 @@
 package ru.kontur.mobile.visualfsm.sample_android
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -9,7 +8,15 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import ru.kontur.mobile.visualfsm.sample_android.ui.theme.VisualFSMSampleAndroidTheme
+import org.koin.android.ext.android.inject
+import org.koin.core.module.dsl.scopedOf
+import org.koin.core.qualifier.Qualifier
+import org.koin.dsl.module
+import ru.kontur.mobile.visualfsm.sample_android.feature.auth.di.AuthStateModuleFactory
+import ru.kontur.mobile.visualfsm.sample_android.feature.auth.di.AuthStateModuleFactory.AUTH_FSM_SAVED_STATE
+import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMAsyncWorker
+import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMState
+import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFeature
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.ScreenDataMapper
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.LoginScreenData
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.RegistrationScreenData
@@ -17,29 +24,40 @@ import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.UserAuthorizedScre
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen.LoginScreen
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen.RegistrationScreen
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.screen.UserAuthorizedScreen
+import ru.kontur.mobile.visualfsm.sample_android.ui.theme.VisualFSMSampleAndroidTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : BaseActivity() {
+
+    private val authFeature: AuthFeature by inject()
+
+    override val stateScopeModule = { stateScopeQualifier: Qualifier, bundle: Bundle? ->
+        AuthStateModuleFactory.create(stateScopeQualifier, bundle)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             VisualFSMSampleAndroidTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier
                         .fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    AuthFlow()
+                    AuthFlow(authFeature)
                 }
             }
         }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(AUTH_FSM_SAVED_STATE, authFeature.getCurrentState())
+        super.onSaveInstanceState(outState)
+    }
 }
 
 @Composable
-private fun AuthFlow() {
-    val authFeature = DependencyManager.getAuthFeature()
-
+private fun AuthFlow(authFeature: AuthFeature) {
     val state = authFeature.observeState()
         .collectAsState(
             initial = authFeature.getCurrentState()
