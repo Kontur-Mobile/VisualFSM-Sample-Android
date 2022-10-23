@@ -9,12 +9,14 @@ buildscript {
         lifecycle_runtime_ktx_version = '2.5.1'
         activity_compose_version = '1.6.0'
         core_ktx_version = '1.9.0'
-        koin_version= '3.2.1'
+        koin_version = '3.2.1'
 
         // Test dependency versions
         junit_version = '4.13.2'
-        test_ext_junit_version= '1.1.3'
+        test_ext_junit_version = '1.1.3'
         espresso_core_version = '3.4.0'
+
+        kaspresso_version = '1.4.2'
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
