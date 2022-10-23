@@ -8,10 +8,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.kontur.mobile.visualfsm.sample_android.resources.TestTag
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.LoginScreenData
 import ru.kontur.mobile.visualfsm.sample_android.ui.common.CustomButton
 import ru.kontur.mobile.visualfsm.sample_android.ui.common.CustomTextButton
@@ -26,7 +28,8 @@ fun LoginScreenContent(
 ) {
     Column(
         modifier = Modifier
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = 20.dp)
+            .semantics { testTag = TestTag.LoginScreen.container },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -36,14 +39,18 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(64.dp))
         EmailInputField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { testTag = TestTag.LoginScreen.email_input_field },
             message = data.mail,
             onValueChange = onMailChange
         )
         Spacer(modifier = Modifier.height(16.dp))
         PasswordInputField(
             placeHolder = "Password",
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { testTag = TestTag.LoginScreen.password_input_field },
             message = data.password,
             onValueChange = onPasswordChange
         )
@@ -51,6 +58,7 @@ fun LoginScreenContent(
         if (data.errorMessage != null && data.errorMessage.isNotBlank()) {
             Spacer(modifier = Modifier.height(16.dp))
             Text(
+                modifier = Modifier.semantics { testTag = TestTag.LoginScreen.error_text },
                 text = data.errorMessage,
                 color = MaterialTheme.colors.error
             )
@@ -58,7 +66,9 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(32.dp))
         SignUpText(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { testTag = TestTag.LoginScreen.sign_up_text },
             onSignUpClick
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -68,7 +78,8 @@ fun LoginScreenContent(
         } else {
             SignInButton(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .semantics { testTag = TestTag.LoginScreen.sign_in_button },
                 onSignInClick
             )
         }
