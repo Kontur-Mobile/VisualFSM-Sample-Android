@@ -5,12 +5,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.kontur.mobile.visualfsm.sample_android.resources.TestTag
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.RegistrationScreenData
 import ru.kontur.mobile.visualfsm.sample_android.ui.common.CustomButton
 
@@ -25,7 +28,8 @@ fun RegistrationScreenContent(
 ) {
     Column(
         modifier = Modifier
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = 20.dp)
+            .semantics { testTag = TestTag.RegistrationScreen.container },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -33,7 +37,9 @@ fun RegistrationScreenContent(
         RegistrationText()
         Spacer(modifier = Modifier.height(64.dp))
         EmailInputField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { testTag = TestTag.RegistrationScreen.email_input_field },
             message = data.mail,
             onValueChange = onMailChange
         )
@@ -42,20 +48,26 @@ fun RegistrationScreenContent(
             message = data.password,
             onValueChange = onPasswordChange,
             placeHolder = "Password",
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { testTag = TestTag.RegistrationScreen.password_input_field },
         )
         Spacer(modifier = Modifier.height(16.dp))
         PasswordInputField(
             message = data.repeatedPassword,
             onValueChange = onRepeatedPasswordChange,
             placeHolder = "Repeat password",
-            modifier = Modifier.fillMaxWidth()
-        )
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { testTag = TestTag.RegistrationScreen.password_repeat_input_field },
+
+            )
         if (data.errorMessage != null && data.errorMessage.isNotBlank()) {
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = data.errorMessage,
-                color = MaterialTheme.colors.error
+                color = MaterialTheme.colors.error,
+                modifier = Modifier.semantics { testTag = TestTag.RegistrationScreen.error_text },
             )
         }
         Spacer(modifier = Modifier.height(96.dp))
@@ -64,7 +76,9 @@ fun RegistrationScreenContent(
             CircularProgressIndicator()
         } else {
             SignUpButton(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .semantics { testTag = TestTag.RegistrationScreen.sign_up_button },
                 onClick = onRegistrationClick,
             )
         }
@@ -74,7 +88,7 @@ fun RegistrationScreenContent(
 @Composable
 private fun ButtonArrowBack(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     IconButton(
         modifier = modifier,
@@ -89,7 +103,7 @@ private fun ButtonArrowBack(
 
 @Composable
 private fun RegistrationText(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
         text = "Registration",
@@ -101,7 +115,7 @@ private fun RegistrationText(
 @Composable
 private fun SignUpButton(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     CustomButton(
         onClick = onClick,

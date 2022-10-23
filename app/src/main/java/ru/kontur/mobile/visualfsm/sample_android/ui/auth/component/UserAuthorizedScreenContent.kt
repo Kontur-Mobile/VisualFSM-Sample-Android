@@ -8,19 +8,23 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.kontur.mobile.visualfsm.sample_android.resources.TestTag
 import ru.kontur.mobile.visualfsm.sample_android.ui.auth.data.UserAuthorizedScreenData
 
 @Composable
 fun UserAuthorizedScreenContent(
     state: UserAuthorizedScreenData,
-    onLogoutClick: () -> Unit
+    onLogoutClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = 20.dp)
+            .semantics { testTag = TestTag.UserAuthorizedScreen.container },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -30,13 +34,16 @@ fun UserAuthorizedScreenContent(
             fontSize = 26.sp,
         )
         Text(
+            modifier = Modifier.semantics { testTag = TestTag.UserAuthorizedScreen.email_text },
             text = state.mail,
             fontSize = 18.sp,
         )
         Spacer(modifier = Modifier.height(32.dp))
         TextButton(
             onClick = onLogoutClick,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { testTag = TestTag.UserAuthorizedScreen.log_out_button },
         ) {
             Text(
                 text = "Log out",
