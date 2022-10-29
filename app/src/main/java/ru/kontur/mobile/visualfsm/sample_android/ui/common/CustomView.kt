@@ -93,6 +93,7 @@ fun ConfirmDialog(
                     color = Color.White,
                     shape = RoundedCornerShape(16.dp)
                 )
+                .semantics { testTag = TestTag.ConfirmDialogScreen.container }
         ) {
             Column(
                 modifier = Modifier
@@ -113,6 +114,7 @@ fun ConfirmDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
+                            .semantics { testTag = TestTag.ConfirmDialogScreen.ok_button }
                     ) {
                         Text(
                             text = "Ok"
@@ -124,6 +126,7 @@ fun ConfirmDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
+                            .semantics { testTag = TestTag.ConfirmDialogScreen.cancel_button }
                     ) {
                         Text(
                             text = "Cancel"

@@ -24,4 +24,10 @@ object TestTag {
         const val email_text = "user_authorized_screen_email_text"
         const val log_out_button = "user_authorized_screen_log_out_button"
     }
+
+    object ConfirmDialogScreen {
+        const val container = "confirm_dialog_screen_container"
+        const val ok_button = "confirm_dialog_screen_ok_button"
+        const val cancel_button = "confirm_dialog_screen_cancel_button"
+    }
 }
