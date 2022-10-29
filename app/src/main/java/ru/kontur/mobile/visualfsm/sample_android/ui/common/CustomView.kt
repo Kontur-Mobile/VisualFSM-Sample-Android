@@ -4,16 +4,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import ru.kontur.mobile.visualfsm.sample_android.resources.TestTag
 
 @Composable
 fun CustomInputField(
@@ -22,7 +25,7 @@ fun CustomInputField(
     onValueChange: (String) -> Unit,
     placeHolder: String,
     leadingIcon: @Composable (() -> Unit),
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     TextField(
         value = message,
@@ -66,9 +69,11 @@ fun CustomTextButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    testTag: String? = null,
 ) {
     TextButton(
         onClick = onClick,
+        modifier = Modifier.semantics { testTag?.let { this.testTag = testTag } },
     ) {
         Text(
             text = text,

@@ -67,8 +67,7 @@ fun LoginScreenContent(
         Spacer(modifier = Modifier.height(32.dp))
         SignUpText(
             modifier = Modifier
-                .fillMaxWidth()
-                .semantics { testTag = TestTag.LoginScreen.sign_up_text },
+                .fillMaxWidth(),
             onSignUpClick
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -121,6 +120,7 @@ private fun SignUpText(
         CustomTextButton(
             text = "Sign up",
             onClick = onClick,
+            testTag = TestTag.LoginScreen.sign_up_text,
         )
     }
 }
