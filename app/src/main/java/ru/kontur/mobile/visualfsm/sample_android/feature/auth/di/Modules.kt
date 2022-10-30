@@ -7,6 +7,7 @@ import org.koin.dsl.module
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMAsyncWorker
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMState
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFeature
+import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthTransitionCallback
 
 object AuthStateModuleFactory {
 
@@ -14,9 +15,13 @@ object AuthStateModuleFactory {
         scope(stateScopeQualifier) {
             scopedOf(::AuthFSMAsyncWorker)
             scoped {
+                AuthTransitionCallback(get())
+            }
+            scoped {
                 AuthFeature(
                     getSavedOrInitialAuthFSMState(bundle),
-                    get()
+                    get(),
+                    get(),
                 )
             }
         }
