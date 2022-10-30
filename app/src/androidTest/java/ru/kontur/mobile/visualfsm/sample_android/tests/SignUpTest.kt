@@ -20,6 +20,7 @@ class SignUpTest : BaseTestCase() {
                 emailInput.performTextInput("TestUser")
                 passwordInput.performTextInput("testuserpassword")
                 passwordRepeatInput.performTextInput("testuserpassword")
+                signUpButton.assertIsDisplayed()
                 signUpButton.performClick()
             }
             onComposeScreen<ConfirmDialogScreen> {
