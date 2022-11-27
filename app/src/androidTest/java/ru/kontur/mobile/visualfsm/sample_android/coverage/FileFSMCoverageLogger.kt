@@ -1,18 +1,13 @@
 package ru.kontur.mobile.visualfsm.sample_android.coverage
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.os.Build
-import android.os.Environment
 import androidx.test.platform.app.InstrumentationRegistry
 import ru.kontur.mobile.visualfsm.Action
-import ru.kontur.mobile.visualfsm.Edge
 import ru.kontur.mobile.visualfsm.State
 import ru.kontur.mobile.visualfsm.Transition
 import ru.kontur.mobile.visualfsm.sample_android.common.fsm.coverage.FSMCoverageLogger
+import ru.kontur.mobile.visualfsm.tools.VisualFSM
 import java.io.File
 import kotlin.reflect.KClass
-import kotlin.reflect.full.findAnnotation
 
 class FileFSMCoverageLogger : FSMCoverageLogger() {
 
@@ -32,13 +27,7 @@ class FileFSMCoverageLogger : FSMCoverageLogger() {
             file.createNewFile()
         }
 
-        val nameFromEdgeAnnotation = transitionClass.findAnnotation<Edge>()?.name
-
-        val edgeName = when {
-            nameFromEdgeAnnotation != null -> nameFromEdgeAnnotation
-            useTransitionName -> transitionClass.simpleName
-            else -> actionClass.simpleName
-        } ?: throw IllegalStateException("Edge must have name")
+        val edgeName = VisualFSM.getEdgeName(transitionClass)
 
         val fromState = transitionClass.supertypes.first().arguments
             .first().type?.classifier as KClass<out State>
@@ -56,14 +45,8 @@ class FileFSMCoverageLogger : FSMCoverageLogger() {
         return provideNew(dest)
     }
 
-    @Suppress("DEPRECATION")
-    @SuppressLint("WorldReadableFiles", "ObsoleteSdkInt")
     private fun provideNew(dest: File): File {
-        val dir: File = when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> instrumentation.targetContext.applicationContext.filesDir.resolve(dest)
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> Environment.getExternalStorageDirectory().resolve(dest)
-            else -> instrumentation.targetContext.applicationContext.getDir(dest.canonicalPath, Context.MODE_WORLD_READABLE)
-        }
+        val dir = instrumentation.targetContext.applicationContext.filesDir.resolve(dest)
         return dir.createDirIfNeeded()
     }
 
