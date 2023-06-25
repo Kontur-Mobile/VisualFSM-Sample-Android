@@ -6,6 +6,7 @@ import org.junit.Assert.*
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.AuthFSMState
 import ru.kontur.mobile.visualfsm.sample_android.feature.auth.fsm.actions.AuthFSMAction
 import ru.kontur.mobile.visualfsm.tools.VisualFSM
+import ru.kontur.mobile.visualfsm.tools.graphviz.preset.DotAttributesDefaultPreset
 
 class AuthFSMTests {
 
@@ -16,6 +17,7 @@ class AuthFSMTests {
                 baseAction = AuthFSMAction::class,
                 baseState = AuthFSMState::class,
                 initialState = AuthFSMState.Login::class,
+                attributes = DotAttributesDefaultPreset(AuthFSMState.AsyncWorkState::class),
             )
         )
         assertTrue(true)
