@@ -14,7 +14,12 @@ parser.add_argument("-output", '--output_path', type=str, help='path to results 
 args = parser.parse_args()
 
 
-def write_coverage_graph(all_transitions_file_path: str, covered_transitions_file_path: str, results_output_path):
+def write_coverage_graph(
+        all_transitions_file_path: str,
+        covered_transitions_file_path: str,
+        results_output_path: str,
+        base_state: str
+):
     # absolute dir the script is in
     script_dir = os.path.dirname(__file__)
 
@@ -31,17 +36,10 @@ def write_coverage_graph(all_transitions_file_path: str, covered_transitions_fil
 
     all_transitions_info = set()
     covered_transitions_info = set()
-    base_state = "undefinedBaseState"
-    initial_state = "undefinedInitialState"
 
     for index, allTransitionsFileLine in enumerate(all_transitions_file_lines):
-        if index == 0:
-            base_state = allTransitionsFileLine[:-2]
-        elif index == 1:
-            initial_state = allTransitionsFileLine[:-2]
-        else:
-            split = allTransitionsFileLine.split(",")
-            all_transitions_info.add((split[0], split[1], split[2]))
+        split = allTransitionsFileLine.split(",")
+        all_transitions_info.add((split[0], split[1], split[2]))
 
     for coveredTransitionsFileLine in covered_transitions_file_lines:
         split = coveredTransitionsFileLine.split(",")
@@ -68,7 +66,6 @@ def write_coverage_graph(all_transitions_file_path: str, covered_transitions_fil
 
     with open(results_output_path + base_state + "CoverageGraph.dot", "w") as file:
         file.write("digraph " + base_state + "Transitions {\n")
-        file.write("\"" + initial_state + "\"\n")
         for state in all_states_info:
             if state in covered_states_info:
                 continue
@@ -120,6 +117,7 @@ for file_name in file_names:
         base_state_name = file_name[:-all_transitions_file_end_length]
         covered_transitions_file_name = base_state_name + "CoveredTransitions.csv"
         if covered_transitions_file_name in file_names:
-            write_coverage_graph(input_path + file_name, input_path + covered_transitions_file_name, output_path)
+            write_coverage_graph(input_path + file_name, input_path + covered_transitions_file_name, output_path,
+                                 base_state_name)
         else:
-            write_coverage_graph(input_path + file_name, "", output_path)
+            write_coverage_graph(input_path + file_name, "", output_path, base_state_name)
