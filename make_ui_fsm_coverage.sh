@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#Script for generating FSM graph with coverage.
+#Runs instrumented tests.
+#Collects information about all transitions and transitions that were performed in instrumental tests in one directory.
+#Executes a script to generate coverage graphs in dot format.
+#Executes a script to generate coverage graphs in svg format.
+
 ./gradlew uninstallAll
 ./gradlew connectedDebugAndroidTest
 
