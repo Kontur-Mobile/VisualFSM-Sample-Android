@@ -22,7 +22,7 @@ class FileFSMCoverageLogger : FSMCoverageLogger() {
     ) {
         val directory = provide(File("ui_fsm_coverage"))
 
-        val file = directory.resolve("${baseStateClass.simpleName}CoveredTransitions.txt")
+        val file = directory.resolve("${baseStateClass.simpleName}CoveredTransitions.csv")
         if (!file.exists()) {
             file.createNewFile()
         }
