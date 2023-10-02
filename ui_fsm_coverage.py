@@ -3,9 +3,9 @@ import os
 import re
 import sys
 
-parser = argparse.ArgumentParser(description='Generate FSM graph with coverage')
+parser = argparse.ArgumentParser(description='Generate FSM graph with coverage in dot format')
 parser.add_argument("-all", '--all_transitions_file_path', type=str,
-                    help='path to file with base state and all transitions of FSM', default="")
+                    help='path to file with all transitions of FSM', default="")
 parser.add_argument("-covered", '--covered_transitions_file_path', type=str,
                     help='path to file with transitions covers by tests', default="")
 parser.add_argument("-input", '--input_path', type=str, help='path to package with all and covered transitions info',
