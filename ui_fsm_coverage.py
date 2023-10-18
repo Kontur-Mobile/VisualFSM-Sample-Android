@@ -66,6 +66,20 @@ def write_coverage_graph(
 
     with open(results_output_path + base_state + "CoverageGraph.dot", "w") as file:
         file.write("digraph " + base_state + "Transitions {\n")
+        file.write("label = \"Coverage statistics:\\nStates: ")
+        file.write(str(round((len(covered_states_info)/len(all_states_info)) * 100, 2)))
+        file.write("% ")
+        file.write(str(len(covered_states_info)))
+        file.write("/")
+        file.write(str(len(all_states_info)))
+        file.write("\\nTransitions: ")
+        file.write(str(round((len(covered_transitions_info)/len(all_transitions_info)) * 100, 2)))
+        file.write("% ")
+        file.write(str(len(covered_transitions_info)))
+        file.write("/")
+        file.write(str(len(all_transitions_info)))
+        file.write("\"\n")
+        file.write("labelloc = \"t\"\n")
         for state in all_states_info:
             if state in covered_states_info:
                 continue
